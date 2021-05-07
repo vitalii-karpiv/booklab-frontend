@@ -26,5 +26,6 @@ module.exports = {
     "prettier/prettier": 1,
     "react/prop-types": 1,
     "no-unused-vars": 1,
+    "jsx-a11y/label-has-associated-control": 1,
   },
 };
