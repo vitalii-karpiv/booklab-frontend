@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import paths from "../../router/paths";
 
 export default function AuthLayout(props) {
-  const { children, onLogin } = props;
+  const { children } = props;
   return (
     <>
       <header className="bg-red-300 h-16">
@@ -11,7 +11,6 @@ export default function AuthLayout(props) {
           <div className="flex justify-between w-40">
             <NavLink
               to={paths.login}
-              onClick={onLogin}
               className="bg-red-600 p-1 rounded px-2 text-white hover:bg-red-700"
             >
               Login

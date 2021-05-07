@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AppLayout from "../components/layouts/AppLayout";
 import AuthLayout from "../components/layouts/AuthLayout";
@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import paths from "./paths";
+import AuthManager from "../services/AuthManager";
 
 const AppRoutes = [
   {
@@ -33,51 +34,53 @@ const AuthRoutes = [
   },
 ];
 
-export default function RootRouter() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default class RootRouter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoggedIn: AuthManager.isLoggedIn(),
+    };
+  }
 
-  const onLogin = () => {
-    setIsLoggedIn(true);
-  };
-  const onLogout = () => {
-    setIsLoggedIn(false);
-  };
+  componentDidMount() {
+    this.subscriber = (token) => {
+      this.setState({ isLoggedIn: !!token });
+    };
+    AuthManager.subscribe(this.subscriber);
+  }
 
-  return (
-    <BrowserRouter>
-      {isLoggedIn ? (
-        <AppLayout onLogout={onLogout}>
-          <Switch>
-            {AppRoutes.map(({ path, Component, exact }) => {
-              return (
-                <Route
-                  key={path}
-                  path={path}
-                  exact={exact}
-                  component={Component}
-                />
-              );
-            })}
-            <Redirect to={paths.home} />
-          </Switch>
-        </AppLayout>
-      ) : (
-        <AuthLayout onLogin={onLogin}>
-          <Switch>
-            {AuthRoutes.map(({ path, Component, exact }) => {
-              return (
-                <Route
-                  key={path}
-                  path={path}
-                  exact={exact}
-                  component={Component}
-                />
-              );
-            })}
-            <Redirect to={paths.login} />
-          </Switch>
-        </AuthLayout>
-      )}
-    </BrowserRouter>
-  );
+  componentWillUnmount() {
+    AuthManager.unsubsribe(this.subscriber);
+  }
+
+  render() {
+    const { isLoggedIn } = this.state;
+    return (
+      <BrowserRouter>
+        {isLoggedIn ? (
+          <AppLayout>
+            <Switch>
+              {AppRoutes.map(({ path, Component: c, exact }) => {
+                return (
+                  <Route key={path} path={path} exact={exact} component={c} />
+                );
+              })}
+              <Redirect to={paths.home} />
+            </Switch>
+          </AppLayout>
+        ) : (
+          <AuthLayout>
+            <Switch>
+              {AuthRoutes.map(({ path, Component: c, exact }) => {
+                return (
+                  <Route key={path} path={path} exact={exact} component={c} />
+                );
+              })}
+              <Redirect to={paths.login} />
+            </Switch>
+          </AuthLayout>
+        )}
+      </BrowserRouter>
+    );
+  }
 }

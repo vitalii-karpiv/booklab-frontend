@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import AuthManager from "../services/AuthManager";
 
 export default function Login() {
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -9,8 +13,24 @@ export default function Login() {
     else setPassword(e.target.value);
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (validateEmail(email) && password.length >= 8) {
+      AuthManager.login("token");
+      // history.push("/");
+    } else console.log("Not good");
+  };
+
+  function validateEmail(mail) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(mail).toLowerCase());
+  }
+
   return (
-    <form className="border w-9/12 mx-auto mt-5 rounded-3xl">
+    <form
+      onSubmit={submitHandler}
+      className="border w-9/12 mx-auto mt-5 rounded-3xl"
+    >
       <div className="m-4">
         <h3 className="text-center mb-4">Login</h3>
         <div className="flex flex-col">
@@ -31,7 +51,7 @@ export default function Login() {
         </div>
         <div className="flex justify-center">
           <button
-            type="button"
+            type="submit"
             className="bg-blue-700 w-9/12 text-white rounded-2xl shadow-md hover:bg-blue-800 py-2.5 mx-auto"
           >
             Submit

@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import AuthManager from "../../services/AuthManager";
 import paths from "../../router/paths";
 
 export default function AppLayout(props) {
-  const { children, onLogout } = props;
+  const { children } = props;
   return (
     <>
       <header className="bg-red-300 h-16">
@@ -13,7 +13,7 @@ export default function AppLayout(props) {
             <button
               type="button"
               href="/"
-              onClick={onLogout}
+              onClick={() => AuthManager.logout()}
               className="bg-red-600 p-1 rounded px-2"
             >
               Logout
