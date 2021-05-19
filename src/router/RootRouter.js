@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import AppLayout from '../components/layouts/AppLayout';
 import AuthLayout from '../components/layouts/AuthLayout';
 import Home from '../pages/Home';
+import BookDetails from '../pages/BookDetails';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import paths from './paths';
@@ -13,6 +14,11 @@ const AppRoutes = [
     path: paths.home,
     exact: true,
     Component: Home,
+  },
+  {
+    path: paths.bookDetails,
+    exact: true,
+    Component: BookDetails,
   },
 ];
 

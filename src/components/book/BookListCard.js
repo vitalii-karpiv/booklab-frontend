@@ -7,7 +7,7 @@ export default function BookListCard(props) {
 
   return (
     <div className="bg-gray-100 w-3/12 inline-block rounded-xl m-2">
-      <Link to="/">
+      <Link to="/book-details">
         <img className="w-full rounded-xl" src={image} alt="Book image" />
       </Link>
       <div className="p-2">
