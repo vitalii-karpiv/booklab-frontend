@@ -1,7 +1,13 @@
-class AuthManager {
-  tokenKey = "BOOKLAB_TOKEN";
+import EventEmitter from 'events';
 
-  subsribers = [];
+class AuthManager {
+  tokenKey = 'BOOKLAB_TOKEN';
+
+  emitter = new EventEmitter();
+
+  eventTypes = {
+    LOGIN_STATUS_CHANGED: 'LOGIN_STATUS_CHANGED',
+  };
 
   isLoggedIn() {
     const token = localStorage.getItem(this.tokenKey);
@@ -10,24 +16,18 @@ class AuthManager {
 
   login(token) {
     localStorage.setItem(this.tokenKey, token);
-    this.notifySubsribers(token);
+    this.emitter.emit(this.eventTypes.LOGIN_STATUS_CHANGED, true);
   }
 
   logout() {
     localStorage.removeItem(this.tokenKey);
-    this.notifySubsribers(null);
+    this.emitter.emit(this.eventTypes.LOGIN_STATUS_CHANGED, false);
   }
 
-  subscribe(cb) {
-    this.subsribers.push(cb);
-  }
+  onLoginStatusChange(cb) {
+    this.emitter.on(this.eventTypes.LOGIN_STATUS_CHANGED, cb);
 
-  unsubsribe(cb) {
-    this.subsribers = this.subsribers.filter((subsriber) => cb !== subsriber);
-  }
-
-  notifySubsribers(data) {
-    this.subsribers.forEach((cb) => cb(data));
+    return () => this.emitter.off(this.eventTypes.LOGIN_STATUS_CHANGED, cb);
   }
 }
 

@@ -1,24 +1,20 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import AuthManager from "../services/AuthManager";
+import React, { useState } from 'react';
+import AuthManager from '../services/AuthManager';
 
 export default function Login() {
-  const history = useHistory();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const inputHandler = (e) => {
-    if (e.target.name === "email") setEmail(e.target.value);
+    if (e.target.name === 'email') setEmail(e.target.value);
     else setPassword(e.target.value);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (validateEmail(email) && password.length >= 8) {
-      AuthManager.login("token");
-      // history.push("/");
-    } else console.log("Not good");
+      AuthManager.login('token');
+    } else console.log('Not good');
   };
 
   function validateEmail(mail) {
@@ -27,23 +23,20 @@ export default function Login() {
   }
 
   return (
-    <form
-      onSubmit={submitHandler}
-      className="border w-9/12 mx-auto mt-5 rounded-3xl"
-    >
+    <form onSubmit={submitHandler} className="border w-9/12 lg:w-1/2 mx-auto mt-5 rounded-3xl py-6">
       <div className="m-4">
-        <h3 className="text-center mb-4">Login</h3>
+        <h3 className="text-center mb-7 text-3xl">Login</h3>
         <div className="flex flex-col">
           <input
             name="email"
-            className="bg-gray-100 w-9/12 border rounded-2xl mx-auto mb-4 p-2"
+            className="bg-gray-100 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
             placeholder="Enter email"
             value={email}
             onChange={inputHandler}
           />
           <input
             name="password"
-            className="bg-gray-100 w-9/12 border rounded-2xl mx-auto mb-4 p-2"
+            className="bg-gray-100 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
             placeholder="Enter password"
             value={password}
             onChange={inputHandler}
