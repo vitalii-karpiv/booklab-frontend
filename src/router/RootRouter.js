@@ -17,7 +17,7 @@ const AppRoutes = [
   },
   {
     path: paths.bookDetails,
-    exact: true,
+    exact: false,
     Component: BookDetails,
   },
 ];
