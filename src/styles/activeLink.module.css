@@ -1,0 +1,5 @@
+.link {
+  --tw-text-opacity: 1;
+  color: rgba(99, 102, 241, var(--tw-text-opacity));
+  /* font-weight: ; */
+}

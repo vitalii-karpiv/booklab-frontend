@@ -28,5 +28,7 @@ module.exports = {
     'no-unused-vars': 1,
     'jsx-a11y/label-has-associated-control': 1,
     'no-underscore-dangle': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/no-array-index-key': 0,
   },
 };

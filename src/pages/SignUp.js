@@ -31,21 +31,21 @@ export default function SignUp() {
         <div className="flex flex-col">
           <input
             name="username"
-            className="bg-gray-100 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
+            className="bg-gray-200 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
             placeholder="Enter your username"
             value={username}
             onChange={inputHandler}
           />
           <input
             name="email"
-            className="bg-gray-100 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
+            className="bg-gray-200 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
             placeholder="Enter email"
             value={email}
             onChange={inputHandler}
           />
           <input
             name="password"
-            className="bg-gray-100 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
+            className="bg-gray-200 w-full sm:w-10/12 md:w-9/12 border rounded-2xl mx-auto mb-7 p-2"
             placeholder="Enter password"
             value={password}
             onChange={inputHandler}
