@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import BookDetails from '../pages/BookDetails';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import Profile from '../pages/Profile';
 import paths from './paths';
 import AuthManager from '../services/AuthManager';
 
@@ -19,6 +20,11 @@ const AppRoutes = [
     path: paths.bookDetails,
     exact: false,
     Component: BookDetails,
+  },
+  {
+    path: paths.profile,
+    exact: false,
+    Component: Profile,
   },
 ];
 

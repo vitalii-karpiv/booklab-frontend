@@ -6,7 +6,7 @@ export default function BookListCard({ book }) {
   const { name, image, rating, author } = book;
 
   return (
-    <div className="bg-gray-100 w-48 inline-block rounded-xl m-2">
+    <div className="bg-gray-100 w-48 inline-block rounded-xl m-2 h-80">
       <Link to={generatePath(paths.bookDetails, { id: book._id })}>
         <img className="w-full rounded-xl" src={image} alt="Book" />
       </Link>
